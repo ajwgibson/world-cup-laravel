@@ -25,5 +25,5 @@ Assuming you have those, you will need to do the folling:
 3. ssh into the homestead vm using `vagrant ssh`
 4. Install the laravel dependencies using `composer install`
 5. __TODO__ Create the database and run the migrations
-6. Browse to the application from your host machine at [http://localhost:8000]
+6. Browse to the application from your host machine at [http://localhost:8000](http://localhost:8000)
 
