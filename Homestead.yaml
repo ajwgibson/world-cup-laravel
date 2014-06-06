@@ -1,0 +1,17 @@
+---
+ip: "192.168.10.10"
+memory: 2048
+cpus: 1
+
+authorize: C:\Users\agibson\.ssh\id_rsa.pub
+
+keys:
+    - C:\Users\agibson\.ssh\id_rsa
+
+folders:
+    - map: .
+      to: /home/vagrant/world-cup
+
+sites:
+    - map: world-cup.app
+      to: /home/vagrant/world-cup/public
