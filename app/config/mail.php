@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'smtp',
+	'driver' => 'mail',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.mailgun.org',
+	'host' => 'localhost',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
+	'from' => array('address' => 'no-reply@grumpygibson.com', 'name' => '2014 World Cup Competition'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -119,6 +119,6 @@ return array(
 	|
 	*/
 
-	'pretend' => false,
+	'pretend' => true,
 
 );

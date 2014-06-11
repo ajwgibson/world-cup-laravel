@@ -1,0 +1,33 @@
+body {
+  padding-top: 50px;
+}
+
+#wrap > .container {
+  padding: 20px 15px 20px 15px;
+}
+
+label.required:before {
+    content: "* ";
+    font-weight: bold;
+}
+
+span.subheading {
+	font-size: 0.8em;
+	font-style: italic;
+}
+
+.underlined {
+	border-bottom: 1px solid #e5e5e5;
+}
+
+h1 {
+	padding-top: 30px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #e5e5e5;
+	border-top: 1px solid #e5e5e5;
+}
+
+fieldset {
+	margin-top: 30px;
+}
+
