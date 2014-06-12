@@ -223,7 +223,7 @@ class EntryController extends BaseController {
     // to make their entry visible on the scoreboard.
     private function sendConfirmationEmail($entry)
     {
-        Mail::queue(
+        Mail::send(
             'emails.confirmation',
             array('entry' => $entry),
             function($message) use($entry) {
