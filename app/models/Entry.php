@@ -221,7 +221,7 @@ class Entry extends Eloquent {
      */
     public static function canCreateOrEdit() 
     {
-    	$cutoff = strtotime('12-06-2014 20:00:00'); // GMT rather than local time (BST)
+    	$cutoff = strtotime('13-06-2014 16:00:00'); // GMT rather than local time (BST)
     	$now = time();
 
     	if ($now < $cutoff) return true;
