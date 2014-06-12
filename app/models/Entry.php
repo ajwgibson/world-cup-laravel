@@ -29,7 +29,7 @@ class Entry extends Eloquent {
     // Validation
 
     public static $entry_rules = array(
-        'email'      => 'required|email|max:100|regex:/.+@asidua\.com/i|unique:entries,email',
+        'email'      => 'required|email|max:100|unique:entries,email',
         'first_name' => 'required|max:100',
         'last_name'  => 'required|max:100',
         'secret'     => 'required|confirmed|min:6'

@@ -21,7 +21,7 @@
     	If you want to join in, use the "Competition Entry" link at the top of the page
     	to add or edit your tournament predictions. All you'll need are:
     	<ul>
-    		<li>An Asidua email address.</li>
+    		<li>A valid email address.</li>
     		<li>An ability to guess (sorry predict) the outcome of the various stages of
     		    the tournament.</li>
 		</ul>

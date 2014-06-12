@@ -7,9 +7,10 @@
 
 	<div>
 		<ul>
-			<li>You must use an Asidua email address.</li>
-			<li>You can only create one entry for a given email address.</li>
-			<li>Once you have created an entry you will be able to fill out your predictions.</li>
+			<li>You can only create one entry for any given email address.</li>
+			<li>Once you have created an entry you will be able to fill out your predictions straight away.</li>
+			<li>After you have created your entry, you will receive an email with a link in it.
+				Your entry will not be visible on the scoreboard until you click that link to confirm your entry.</li>
 			<li>Required fields are marked with an asterisk.</li>
 		</ul>
 	</div>
@@ -28,7 +29,7 @@
 			    			'class' => 'form-control col-sm-4', 
 			    			'maxlength' => 50,
 			    			'placeholder' => 'Enter your email address')) }}
-				<span class="help-block">Only Asidua emails will be accepted - sorry.</span>
+				<span class="help-block">You must use a valid email address.</span>
     		</div>	
 		</div>
 
