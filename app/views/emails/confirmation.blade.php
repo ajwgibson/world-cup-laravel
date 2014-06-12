@@ -13,8 +13,4 @@
     			$attributes = array()) }}
     </p>
 
-    <P>
-    	<em><strong>Note: </strong></em>do not attempt to reply to this email!
-    </P>
-
 </body>

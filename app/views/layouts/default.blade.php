@@ -91,6 +91,15 @@
 
       </div>
 
+      <div id="footer">
+        <div class="container">
+          <p class="text-muted">
+            If you get stuck or have any queries, email me at 
+            <a href="mailto:ajw.gibson@gmail.com?Subject=World%20Cup%20Competition" target="_top">ajw.gibson@gmail.com</a>
+          </p>
+        </div>
+      </div>
+
     </div>
 
     <!-- Bootstrap core JavaScript
