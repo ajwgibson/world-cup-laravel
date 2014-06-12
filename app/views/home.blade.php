@@ -13,7 +13,7 @@
 
 @section('content')
 
-	<h1>World Cup Competition Scoreboard</h1>
+	<h1>Scoreboard</h1>
 
 	<div class="col-md-6">
 	@if ($entries)
