@@ -148,7 +148,7 @@ class Entry extends Eloquent {
 	public static $group_c_teams = array(
     	'Colombia'       => 'Colombia', 
     	'Greece'         => 'Greece', 
-    	"Cote D'Ivoire"  => "Cote D'Ivoire", 
+    	'Ivory Coast'    => 'Ivory Coast', 
     	'Japan'          => 'Japan'
 	);
 	public static $group_d_teams = array(
@@ -182,6 +182,14 @@ class Entry extends Eloquent {
     	'Korea Republic' => 'Korea Republic'
 	);
 
+
+    /**
+     * Relationship to many match predictions.
+     */
+    public function matchPredictions()
+    {
+        return $this->hasMany('MatchPrediction');
+    }
 
 	/**
 	 * Returns all the teams in the competition sorted naturaly.

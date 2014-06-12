@@ -95,6 +95,8 @@ class EntryController extends BaseController {
                 ->withErrors($validator);
         }
 
+        DB::beginTransaction();
+
         $entry = new Entry();
         $entry->email        = $input['email'];
         $entry->secret       = Hash::make($input['secret']);
@@ -102,6 +104,21 @@ class EntryController extends BaseController {
         $entry->first_name   = $input['first_name'];
         $entry->last_name    = $input['last_name'];
         $entry->save();
+
+        $matches = Match::all();
+
+        foreach($matches as $match) {
+            $match_prediction = new MatchPrediction();
+
+            $match_prediction->team_a     = $match->team_a;
+            $match_prediction->team_b     = $match->team_b;
+            $match_prediction->group      = $match->group;
+            $match_prediction->match_date = $match->match_date;
+            
+            $entry->matchPredictions()->save($match_prediction);
+        }
+
+        DB::commit();
 
         $this->sendConfirmationEmail($entry);
 
@@ -154,8 +171,17 @@ class EntryController extends BaseController {
         $entry = $this->getEntry();
 
         if ($entry) {
+
             $entry->update($input);
             $entry->save();
+
+            foreach($entry->matchPredictions as $match_prediction) {
+                $field = "match_prediction_$match_prediction->id";
+                if (Input::has($field)) {
+                    $match_prediction->result = Input::get($field);
+                    $match_prediction->save();
+                }
+            }
         }
 
         return Redirect::route('entry.index');

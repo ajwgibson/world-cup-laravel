@@ -17,6 +17,30 @@
 	@endif
 	</div>
 
+	<h3 class="underlined">Group matches</h3>
+	<table class="table table-striped table-compact">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Group</th>
+				<th>Team A</th>
+				<th>Team B</th>
+				<th>Result</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach ($entry->matchPredictions->sortBy('match_date') as $match_prediction)
+			<tr>
+				<td>{{{ $match_prediction->match_date }}}</td>
+				<td>{{{ $match_prediction->group }}}</td>
+				<td>{{{ $match_prediction->team_a }}}</td>
+				<td>{{{ $match_prediction->team_b }}}</td>
+				<td>{{{ $match_prediction->result }}}</td>
+			</tr>
+			@endforeach
+		</tbody>
+	</table>
+
 	<h3 class="underlined">Group placings</h3>
 	<div class="row">
 		<div class="col-sm-6 col-md-3">

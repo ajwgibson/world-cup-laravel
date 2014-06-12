@@ -15,13 +15,26 @@
 
 	<h1>World Cup Competition Scoreboard</h1>
 
-	<div>
+	<div class="col-md-6">
 	@if ($entries)
-		<ol>
-		@foreach ($entries as $entry)
-	        <li>{{{ $entry->fullName() }}} <span class="badge">{{{ $entry->score }}}</span></li>
-	    @endforeach
-		</ol>
+		<table class="table table-striped table-compact">
+			<thead>
+				<tr>
+					<th>Score</th>
+					<th>Name</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach ($entries as $entry)
+				<tr>
+					<td><span class="badge">{{{ $entry->score }}}</span></td>
+					<td>{{{ $entry->fullName() }}}</td>
+					<td>{{{ $entry->email }}}</td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
 	@endif
 	</div>
 
