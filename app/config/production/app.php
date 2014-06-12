@@ -2,6 +2,6 @@
 
 return array(
 
-	'debug' => false,
+	'debug' => $_SERVER['APP_DEBUG'],
 
 );
