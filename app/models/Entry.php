@@ -253,4 +253,92 @@ class Entry extends Eloquent {
         return $query->whereNull('confirmation');
     }
 
+    /**
+     * Calculates the score for this entry.
+     */
+    public function calculateScore()
+    {
+        $score = 0;
+
+        // Start with the group matches
+        foreach ($this->matchPredictions as $match_prediction) {
+
+            $match = Match::where('team_a', $match_prediction->team_a)
+                                ->where('team_b', $match_prediction->team_b)
+                                ->first();
+
+            if ($match && $match->result && $match->result == $match_prediction->result) $score = $score + 1;
+        }
+
+        $admin_entry = Entry::where('email', 'admin')->first();
+
+        if ($admin_entry) {
+
+            // Group rankings
+
+            $ga_score = 0;
+            if ($this->ga_1 && $this->ga_1 == $admin_entry->ga_1) $ga_score = $ga_score + 1;
+            if ($this->ga_2 && $this->ga_2 == $admin_entry->ga_2) $ga_score = $ga_score + 1;
+            if ($this->ga_3 && $this->ga_3 == $admin_entry->ga_3) $ga_score = $ga_score + 1;
+            if ($this->ga_4 && $this->ga_4 == $admin_entry->ga_4) $ga_score = $ga_score + 1;
+            if ($ga_score == 4) $ga_score = $ga_score + 2;
+
+            $gb_score = 0;
+            if ($this->gb_1 && $this->gb_1 == $admin_entry->gb_1) $gb_score = $gb_score + 1;
+            if ($this->gb_2 && $this->gb_2 == $admin_entry->gb_2) $gb_score = $gb_score + 1;
+            if ($this->gb_3 && $this->gb_3 == $admin_entry->gb_3) $gb_score = $gb_score + 1;
+            if ($this->gb_4 && $this->gb_4 == $admin_entry->gb_4) $gb_score = $gb_score + 1;
+            if ($gb_score == 4) $gb_score = $gb_score + 2;
+
+            $gc_score = 0;
+            if ($this->gc_1 && $this->gc_1 == $admin_entry->gc_1) $gc_score = $gc_score + 1;
+            if ($this->gc_2 && $this->gc_2 == $admin_entry->gc_2) $gc_score = $gc_score + 1;
+            if ($this->gc_3 && $this->gc_3 == $admin_entry->gc_3) $gc_score = $gc_score + 1;
+            if ($this->gc_4 && $this->gc_4 == $admin_entry->gc_4) $gc_score = $gc_score + 1;
+            if ($gc_score == 4) $gc_score = $gc_score + 2;
+
+            $gd_score = 0;
+            if ($this->gd_1 && $this->gd_1 == $admin_entry->gd_1) $gd_score = $gd_score + 1;
+            if ($this->gd_2 && $this->gd_2 == $admin_entry->gd_2) $gd_score = $gd_score + 1;
+            if ($this->gd_3 && $this->gd_3 == $admin_entry->gd_3) $gd_score = $gd_score + 1;
+            if ($this->gd_4 && $this->gd_4 == $admin_entry->gd_4) $gd_score = $gd_score + 1;
+            if ($gd_score == 4) $gd_score = $gd_score + 2;
+
+            $ge_score = 0;
+            if ($this->ge_1 && $this->ge_1 == $admin_entry->ge_1) $ge_score = $ge_score + 1;
+            if ($this->ge_2 && $this->ge_2 == $admin_entry->ge_2) $ge_score = $ge_score + 1;
+            if ($this->ge_3 && $this->ge_3 == $admin_entry->ge_3) $ge_score = $ge_score + 1;
+            if ($this->ge_4 && $this->ge_4 == $admin_entry->ge_4) $ge_score = $ge_score + 1;
+            if ($ge_score == 4) $ge_score = $ge_score + 2;
+
+            $gf_score = 0;
+            if ($this->gf_1 && $this->gf_1 == $admin_entry->gf_1) $gf_score = $gf_score + 1;
+            if ($this->gf_2 && $this->gf_2 == $admin_entry->gf_2) $gf_score = $gf_score + 1;
+            if ($this->gf_3 && $this->gf_3 == $admin_entry->gf_3) $gf_score = $gf_score + 1;
+            if ($this->gf_4 && $this->gf_4 == $admin_entry->gf_4) $gf_score = $gf_score + 1;
+            if ($gf_score == 4) $gf_score = $gf_score + 2;
+
+            $gg_score = 0;
+            if ($this->gg_1 && $this->gg_1 == $admin_entry->gg_1) $gg_score = $gg_score + 1;
+            if ($this->gg_2 && $this->gg_2 == $admin_entry->gg_2) $gg_score = $gg_score + 1;
+            if ($this->gg_3 && $this->gg_3 == $admin_entry->gg_3) $gg_score = $gg_score + 1;
+            if ($this->gg_4 && $this->gg_4 == $admin_entry->gg_4) $gg_score = $gg_score + 1;
+            if ($gg_score == 4) $gg_score = $gg_score + 2;
+
+            $gh_score = 0;
+            if ($this->gh_1 && $this->gh_1 == $admin_entry->gh_1) $gh_score = $gh_score + 1;
+            if ($this->gh_2 && $this->gh_2 == $admin_entry->gh_2) $gh_score = $gh_score + 1;
+            if ($this->gh_3 && $this->gh_3 == $admin_entry->gh_3) $gh_score = $gh_score + 1;
+            if ($this->gh_4 && $this->gh_4 == $admin_entry->gh_4) $gh_score = $gh_score + 1;
+            if ($gh_score == 4) $gh_score = $gh_score + 2;
+
+            $score = $score + $ga_score + $gb_score + $gc_score + $gd_score + $ge_score + $gf_score + $gg_score + $gh_score;
+
+        }
+
+
+        $this->score = $score;
+        $this->save();
+    }
+
 }
