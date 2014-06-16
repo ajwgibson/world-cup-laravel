@@ -36,7 +36,7 @@ Route::group(array('prefix' => 'entry'), function()
 // Administration
 Route::group(array('prefix' => 'admin'), function()
 {
-	Route::get('/',       array('as' => 'admin.index',   'uses' => 'AdminController@index'));
+	//Route::get('/',       array('as' => 'admin.index',   'uses' => 'AdminController@index'));
 
-	Route::post('score',  array('as' => 'admin.score',   'uses' => 'AdminController@score'));
+	//Route::post('score',  array('as' => 'admin.score',   'uses' => 'AdminController@score'));
 });
