@@ -3,10 +3,10 @@ ip: "192.168.10.10"
 memory: 2048
 cpus: 1
 
-authorize: C:\Users\agibson\.ssh\id_rsa.pub
+authorize: C:\Users\alan\.ssh\id_rsa.pub
 
 keys:
-    - C:\Users\agibson\.ssh\id_rsa
+    - C:\Users\alan\.ssh\id_rsa
 
 folders:
     - map: .

@@ -32,3 +32,11 @@ Route::group(array('prefix' => 'entry'), function()
 
 	Route::get('confirm/{confirmation}', array('as' => 'entry.confirm', 'uses' => 'EntryController@confirm'));
 });
+
+// Administration
+Route::group(array('prefix' => 'admin'), function()
+{
+	Route::get('/',       array('as' => 'admin.index',   'uses' => 'AdminController@index'));
+
+	Route::post('score',  array('as' => 'admin.score',   'uses' => 'AdminController@score'));
+});

@@ -76,6 +76,15 @@
             </div>
           @endif
 
+          @if (Session::has('info'))
+            <div class="panel panel-info">
+                <div class="panel-heading">Information</div>
+                <div class="panel-body">
+                    <p>{{ Session::get('info') }}</p>
+                </div>
+            </div>
+          @endif
+
           @if ($errors->any())
             <div class="panel panel-danger">
                 <div class="panel-heading">Validation Errors</div>
