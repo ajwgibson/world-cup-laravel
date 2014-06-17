@@ -57,6 +57,7 @@
               <li>{{ link_to_route('instructions', 'Instructions') }}</li>
               <li>{{ link_to_route('entry.index', 'Competition Entry') }}</li>
               @if (Auth::check())
+              <li>{{ link_to_route('admin.index', 'Admin') }}</li>
               <li>{{ link_to_route('logout', 'Logout') }}</li>
               @endif
             </ul>

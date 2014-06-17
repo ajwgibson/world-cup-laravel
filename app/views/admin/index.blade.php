@@ -30,4 +30,15 @@
 
 	</fieldset>
 
+	<fieldset>
+		<legend>Update the group match results</legend>
+
+		{{ link_to_route(
+				'admin.matches', 
+				'Match results', 
+				$parameters = array(), 
+				$attributes = array('class' => 'btn btn-primary')) }}
+
+	</fieldset>
+
 @stop

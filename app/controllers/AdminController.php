@@ -51,4 +51,38 @@ class AdminController extends BaseController {
 		return Redirect::route('admin.index')
                 ->withInfo($msg);
 	}
+
+	/**
+	 * Serves up the matches results page.
+	 */
+	public function matches()
+	{
+		$matches = Match::all();
+
+		return View::make('admin.matches')
+				->with('matches', $matches);;
+	}
+
+	/**
+	 * Updates the matches results.
+	 */
+	public function updateMatches()
+	{
+		$matches = Match::all();
+
+		foreach($matches as $match) {
+            $field = "match_$match->id";
+            if (Input::has($field)) {
+                $match->result = Input::get($field);
+            } else {
+            	$match->result = null;
+        	}
+            $match->save();
+
+        }
+
+		return Redirect::route('admin.index')
+                ->withInfo('Match results saved.');
+	}
+
 }

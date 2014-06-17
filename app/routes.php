@@ -74,4 +74,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 	Route::get('/',       array('as' => 'admin.index',   'uses' => 'AdminController@index'));
 
 	Route::post('score',  array('as' => 'admin.score',   'uses' => 'AdminController@score'));
+	
+	Route::get('matches',  array('as' => 'admin.matches', 'uses' => 'AdminController@matches'));
+	Route::post('matches', array('uses' => 'AdminController@updateMatches'));
 });
