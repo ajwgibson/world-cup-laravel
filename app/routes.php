@@ -33,10 +33,45 @@ Route::group(array('prefix' => 'entry'), function()
 	Route::get('confirm/{confirmation}', array('as' => 'entry.confirm', 'uses' => 'EntryController@confirm'));
 });
 
-// Administration
-Route::group(array('prefix' => 'admin'), function()
-{
-	//Route::get('/',       array('as' => 'admin.index',   'uses' => 'AdminController@index'));
+// Login (GET)
+Route::get('login',  array('as' => 'login', function() { 
 
-	//Route::post('score',  array('as' => 'admin.score',   'uses' => 'AdminController@score'));
+	return View::make('login');
+
+}))->before('guest');
+
+// Login (POST)
+Route::post('login', array(function() {
+	
+	$user = array(
+		'username' => Input::get('username'),
+		'password' => Input::get('password'));
+
+	if (Auth::attempt($user)) {
+		return Redirect::intended('/');
+	}
+
+	return Redirect::route('login')
+			->withMessage('Login failed. Please try again.')
+			->withInput();
+
+}));
+
+// Logout
+Route::get('logout',  array('as' => 'logout', function() { 
+	
+	Auth::logout();
+
+	return Redirect::route('home')
+			->withInfo('You are now logged out.');
+
+}))->before('auth');
+
+
+// Administration
+Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
+{
+	Route::get('/',       array('as' => 'admin.index',   'uses' => 'AdminController@index'));
+
+	Route::post('score',  array('as' => 'admin.score',   'uses' => 'AdminController@score'));
 });
