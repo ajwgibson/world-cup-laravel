@@ -60,7 +60,7 @@ class AdminController extends BaseController {
 		$matches = Match::all();
 
 		return View::make('admin.matches')
-				->with('matches', $matches);;
+				->with('matches', $matches);
 	}
 
 	/**

@@ -19,4 +19,12 @@ class HomeController extends BaseController {
 		return View::make('instructions');
 	}
 
+	public function results()
+	{
+		$matches = Match::all();
+
+		return View::make('results')
+				->with('matches', $matches);
+	}
+
 }

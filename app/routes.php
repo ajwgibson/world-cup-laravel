@@ -17,6 +17,9 @@ Route::get('/', array('as' => 'home', 'uses' => 'HomeController@index'));
 // Instructions page
 Route::get('instructions', array('as' => 'instructions', 'uses' => 'HomeController@instructions'));
 
+// Results page
+Route::get('results', array('as' => 'results', 'uses' => 'HomeController@results'));
+
 // Competition entries
 Route::group(array('prefix' => 'entry'), function()
 {
