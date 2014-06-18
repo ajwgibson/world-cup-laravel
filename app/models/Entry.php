@@ -263,12 +263,12 @@ class Entry extends Eloquent {
 
         $admin_entry = Entry::where('email', 'admin')->first();
         if ($admin_entry) {
-            $score = $score + calculateGroupPredictionsScore($admin_entry);
-            $score = $score + calculateFinalSixteenScore($admin_entry);
-            $score = $score + calculateFinalEightScore($admin_entry);
-            $score = $score + calculateFinalFourScore($admin_entry);
-            $score = $score + calculateFinalTwoScore($admin_entry);
-            $score = $score + calculateWinnerScore($admin_entry);
+            $score = $score + $this->calculateGroupPredictionsScore($admin_entry);
+            $score = $score + $this->calculateFinalSixteenScore($admin_entry);
+            $score = $score + $this->calculateFinalEightScore($admin_entry);
+            $score = $score + $this->calculateFinalFourScore($admin_entry);
+            $score = $score + $this->calculateFinalTwoScore($admin_entry);
+            $score = $score + $this->calculateWinnerScore($admin_entry);
         }
 
         $this->score = $score;

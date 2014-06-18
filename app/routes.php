@@ -80,4 +80,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 	
 	Route::get('matches',  array('as' => 'admin.matches', 'uses' => 'AdminController@matches'));
 	Route::post('matches', array('uses' => 'AdminController@updateMatches'));
+
+	Route::get('entry',  array('as' => 'admin.entry', 'uses' => 'AdminController@entry'));
+	Route::post('entry', array('uses' => 'AdminController@updateEntry'));
 });

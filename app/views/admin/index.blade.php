@@ -41,4 +41,15 @@
 
 	</fieldset>
 
+	<fieldset>
+		<legend>Update the admin entry</legend>
+
+		{{ link_to_route(
+				'admin.entry', 
+				'Admin entry', 
+				$parameters = array(), 
+				$attributes = array('class' => 'btn btn-primary')) }}
+
+	</fieldset>
+
 @stop

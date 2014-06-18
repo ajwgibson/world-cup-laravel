@@ -22,9 +22,11 @@ class HomeController extends BaseController {
 	public function results()
 	{
 		$matches = Match::all();
+		$admin_entry = Entry::where('email', 'admin')->first();
 
 		return View::make('results')
-				->with('matches', $matches);
+				->with('matches', $matches)
+				->with('entry', $admin_entry);
 	}
 
 }

@@ -85,4 +85,33 @@ class AdminController extends BaseController {
                 ->withInfo('Match results saved.');
 	}
 
+	/**
+	 * Serves up the admin entry page.
+	 */
+	public function entry()
+	{
+		$entry = Entry::where('email', 'admin')->first();
+
+		return View::make('admin.entry')
+				->with('entry', $entry);
+	}
+
+	/**
+	 * Updates the admin entry.
+	 */
+	public function updateEntry()
+	{
+        $input = Input::all();
+
+		$entry = Entry::where('email', 'admin')->first();
+
+        if ($entry) {
+            $entry->update($input);
+            $entry->save();
+        }
+
+		return Redirect::route('admin.index')
+                ->withInfo('Admin entry saved.');
+	}
+
 }

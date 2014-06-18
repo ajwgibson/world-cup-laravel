@@ -42,4 +42,8 @@
 		</tbody>
 	</table>
 
+	@if ($entry)
+	@include('entry._entry_details', array('entry' => $entry))
+	@endif
+
 @stop
