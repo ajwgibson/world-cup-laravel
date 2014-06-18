@@ -2,6 +2,16 @@
 
 class Entry extends Eloquent {
 
+    const GROUP_MATCH_SCORE         = 1;
+    const GROUP_PLACE_SCORE         = 1;
+    const GROUP_PLACE_PERFECT_SCORE = 2;
+    const FINAL_SIXTEEN_SCORE       = 1;
+    const FINAL_EIGHT_SCORE         = 2;
+    const FINAL_FOUR_SCORE          = 4;
+    const FINAL_TWO_SCORE           = 6;
+    const WINNER_SCORE              = 8;
+
+
 	// Mass Assignment
     protected $fillable = array(
 
@@ -288,7 +298,7 @@ class Entry extends Eloquent {
                                 ->where('team_b', $match_prediction->team_b)
                                 ->first();
 
-            if ($match && $match->result && $match->result == $match_prediction->result) $score = $score + 1;
+            if ($match && $match->result && $match->result == $match_prediction->result) $score = $score + self::GROUP_MATCH_SCORE;
         }
 
         return $score;
@@ -300,60 +310,68 @@ class Entry extends Eloquent {
     private function calculateGroupPredictionsScore($admin_entry)
     {
         $ga_score = 0;
-        if ($this->ga_1 && $this->ga_1 == $admin_entry->ga_1) $ga_score = $ga_score + 1;
-        if ($this->ga_2 && $this->ga_2 == $admin_entry->ga_2) $ga_score = $ga_score + 1;
-        if ($this->ga_3 && $this->ga_3 == $admin_entry->ga_3) $ga_score = $ga_score + 1;
-        if ($this->ga_4 && $this->ga_4 == $admin_entry->ga_4) $ga_score = $ga_score + 1;
-        if ($ga_score == 4) $ga_score = $ga_score + 2;
+        if ($this->ga_1 && $this->ga_1 == $admin_entry->ga_1) $ga_score = $ga_score + self::GROUP_PLACE_SCORE;
+        if ($this->ga_2 && $this->ga_2 == $admin_entry->ga_2) $ga_score = $ga_score + self::GROUP_PLACE_SCORE;
+        if ($this->ga_3 && $this->ga_3 == $admin_entry->ga_3) $ga_score = $ga_score + self::GROUP_PLACE_SCORE;
+        if ($this->ga_4 && $this->ga_4 == $admin_entry->ga_4) $ga_score = $ga_score + self::GROUP_PLACE_SCORE;
+
+        if ($ga_score == (4 * self::GROUP_PLACE_SCORE)) $ga_score = $ga_score + self::GROUP_PLACE_PERFECT_SCORE;
 
         $gb_score = 0;
-        if ($this->gb_1 && $this->gb_1 == $admin_entry->gb_1) $gb_score = $gb_score + 1;
-        if ($this->gb_2 && $this->gb_2 == $admin_entry->gb_2) $gb_score = $gb_score + 1;
-        if ($this->gb_3 && $this->gb_3 == $admin_entry->gb_3) $gb_score = $gb_score + 1;
-        if ($this->gb_4 && $this->gb_4 == $admin_entry->gb_4) $gb_score = $gb_score + 1;
-        if ($gb_score == 4) $gb_score = $gb_score + 2;
+        if ($this->gb_1 && $this->gb_1 == $admin_entry->gb_1) $gb_score = $gb_score + self::GROUP_PLACE_SCORE;
+        if ($this->gb_2 && $this->gb_2 == $admin_entry->gb_2) $gb_score = $gb_score + self::GROUP_PLACE_SCORE;
+        if ($this->gb_3 && $this->gb_3 == $admin_entry->gb_3) $gb_score = $gb_score + self::GROUP_PLACE_SCORE;
+        if ($this->gb_4 && $this->gb_4 == $admin_entry->gb_4) $gb_score = $gb_score + self::GROUP_PLACE_SCORE;
+
+        if ($gb_score == (4 * self::GROUP_PLACE_SCORE)) $gb_score = $gb_score + self::GROUP_PLACE_PERFECT_SCORE;
 
         $gc_score = 0;
-        if ($this->gc_1 && $this->gc_1 == $admin_entry->gc_1) $gc_score = $gc_score + 1;
-        if ($this->gc_2 && $this->gc_2 == $admin_entry->gc_2) $gc_score = $gc_score + 1;
-        if ($this->gc_3 && $this->gc_3 == $admin_entry->gc_3) $gc_score = $gc_score + 1;
-        if ($this->gc_4 && $this->gc_4 == $admin_entry->gc_4) $gc_score = $gc_score + 1;
-        if ($gc_score == 4) $gc_score = $gc_score + 2;
+        if ($this->gc_1 && $this->gc_1 == $admin_entry->gc_1) $gc_score = $gc_score + self::GROUP_PLACE_SCORE;
+        if ($this->gc_2 && $this->gc_2 == $admin_entry->gc_2) $gc_score = $gc_score + self::GROUP_PLACE_SCORE;
+        if ($this->gc_3 && $this->gc_3 == $admin_entry->gc_3) $gc_score = $gc_score + self::GROUP_PLACE_SCORE;
+        if ($this->gc_4 && $this->gc_4 == $admin_entry->gc_4) $gc_score = $gc_score + self::GROUP_PLACE_SCORE;
+
+        if ($gc_score == (4 * self::GROUP_PLACE_SCORE)) $gc_score = $gc_score + self::GROUP_PLACE_PERFECT_SCORE;
 
         $gd_score = 0;
-        if ($this->gd_1 && $this->gd_1 == $admin_entry->gd_1) $gd_score = $gd_score + 1;
-        if ($this->gd_2 && $this->gd_2 == $admin_entry->gd_2) $gd_score = $gd_score + 1;
-        if ($this->gd_3 && $this->gd_3 == $admin_entry->gd_3) $gd_score = $gd_score + 1;
-        if ($this->gd_4 && $this->gd_4 == $admin_entry->gd_4) $gd_score = $gd_score + 1;
-        if ($gd_score == 4) $gd_score = $gd_score + 2;
+        if ($this->gd_1 && $this->gd_1 == $admin_entry->gd_1) $gd_score = $gd_score + self::GROUP_PLACE_SCORE;
+        if ($this->gd_2 && $this->gd_2 == $admin_entry->gd_2) $gd_score = $gd_score + self::GROUP_PLACE_SCORE;
+        if ($this->gd_3 && $this->gd_3 == $admin_entry->gd_3) $gd_score = $gd_score + self::GROUP_PLACE_SCORE;
+        if ($this->gd_4 && $this->gd_4 == $admin_entry->gd_4) $gd_score = $gd_score + self::GROUP_PLACE_SCORE;
+
+        if ($gd_score == (4 * self::GROUP_PLACE_SCORE)) $gd_score = $gd_score + self::GROUP_PLACE_PERFECT_SCORE;
 
         $ge_score = 0;
-        if ($this->ge_1 && $this->ge_1 == $admin_entry->ge_1) $ge_score = $ge_score + 1;
-        if ($this->ge_2 && $this->ge_2 == $admin_entry->ge_2) $ge_score = $ge_score + 1;
-        if ($this->ge_3 && $this->ge_3 == $admin_entry->ge_3) $ge_score = $ge_score + 1;
-        if ($this->ge_4 && $this->ge_4 == $admin_entry->ge_4) $ge_score = $ge_score + 1;
-        if ($ge_score == 4) $ge_score = $ge_score + 2;
+        if ($this->ge_1 && $this->ge_1 == $admin_entry->ge_1) $ge_score = $ge_score + self::GROUP_PLACE_SCORE;
+        if ($this->ge_2 && $this->ge_2 == $admin_entry->ge_2) $ge_score = $ge_score + self::GROUP_PLACE_SCORE;
+        if ($this->ge_3 && $this->ge_3 == $admin_entry->ge_3) $ge_score = $ge_score + self::GROUP_PLACE_SCORE;
+        if ($this->ge_4 && $this->ge_4 == $admin_entry->ge_4) $ge_score = $ge_score + self::GROUP_PLACE_SCORE;
+
+        if ($ge_score == (4 * self::GROUP_PLACE_SCORE)) $ge_score = $ge_score + self::GROUP_PLACE_PERFECT_SCORE;
 
         $gf_score = 0;
-        if ($this->gf_1 && $this->gf_1 == $admin_entry->gf_1) $gf_score = $gf_score + 1;
-        if ($this->gf_2 && $this->gf_2 == $admin_entry->gf_2) $gf_score = $gf_score + 1;
-        if ($this->gf_3 && $this->gf_3 == $admin_entry->gf_3) $gf_score = $gf_score + 1;
-        if ($this->gf_4 && $this->gf_4 == $admin_entry->gf_4) $gf_score = $gf_score + 1;
-        if ($gf_score == 4) $gf_score = $gf_score + 2;
+        if ($this->gf_1 && $this->gf_1 == $admin_entry->gf_1) $gf_score = $gf_score + self::GROUP_PLACE_SCORE;
+        if ($this->gf_2 && $this->gf_2 == $admin_entry->gf_2) $gf_score = $gf_score + self::GROUP_PLACE_SCORE;
+        if ($this->gf_3 && $this->gf_3 == $admin_entry->gf_3) $gf_score = $gf_score + self::GROUP_PLACE_SCORE;
+        if ($this->gf_4 && $this->gf_4 == $admin_entry->gf_4) $gf_score = $gf_score + self::GROUP_PLACE_SCORE;
+
+        if ($gf_score == (4 * self::GROUP_PLACE_SCORE)) $gf_score = $gf_score + self::GROUP_PLACE_PERFECT_SCORE;
 
         $gg_score = 0;
-        if ($this->gg_1 && $this->gg_1 == $admin_entry->gg_1) $gg_score = $gg_score + 1;
-        if ($this->gg_2 && $this->gg_2 == $admin_entry->gg_2) $gg_score = $gg_score + 1;
-        if ($this->gg_3 && $this->gg_3 == $admin_entry->gg_3) $gg_score = $gg_score + 1;
-        if ($this->gg_4 && $this->gg_4 == $admin_entry->gg_4) $gg_score = $gg_score + 1;
-        if ($gg_score == 4) $gg_score = $gg_score + 2;
+        if ($this->gg_1 && $this->gg_1 == $admin_entry->gg_1) $gg_score = $gg_score + self::GROUP_PLACE_SCORE;
+        if ($this->gg_2 && $this->gg_2 == $admin_entry->gg_2) $gg_score = $gg_score + self::GROUP_PLACE_SCORE;
+        if ($this->gg_3 && $this->gg_3 == $admin_entry->gg_3) $gg_score = $gg_score + self::GROUP_PLACE_SCORE;
+        if ($this->gg_4 && $this->gg_4 == $admin_entry->gg_4) $gg_score = $gg_score + self::GROUP_PLACE_SCORE;
+
+        if ($gg_score == (4 * self::GROUP_PLACE_SCORE)) $gg_score = $gg_score + self::GROUP_PLACE_PERFECT_SCORE;
 
         $gh_score = 0;
-        if ($this->gh_1 && $this->gh_1 == $admin_entry->gh_1) $gh_score = $gh_score + 1;
-        if ($this->gh_2 && $this->gh_2 == $admin_entry->gh_2) $gh_score = $gh_score + 1;
-        if ($this->gh_3 && $this->gh_3 == $admin_entry->gh_3) $gh_score = $gh_score + 1;
-        if ($this->gh_4 && $this->gh_4 == $admin_entry->gh_4) $gh_score = $gh_score + 1;
-        if ($gh_score == 4) $gh_score = $gh_score + 2;
+        if ($this->gh_1 && $this->gh_1 == $admin_entry->gh_1) $gh_score = $gh_score + self::GROUP_PLACE_SCORE;
+        if ($this->gh_2 && $this->gh_2 == $admin_entry->gh_2) $gh_score = $gh_score + self::GROUP_PLACE_SCORE;
+        if ($this->gh_3 && $this->gh_3 == $admin_entry->gh_3) $gh_score = $gh_score + self::GROUP_PLACE_SCORE;
+        if ($this->gh_4 && $this->gh_4 == $admin_entry->gh_4) $gh_score = $gh_score + self::GROUP_PLACE_SCORE;
+
+        if ($gh_score == (4 * self::GROUP_PLACE_SCORE)) $gh_score = $gh_score + self::GROUP_PLACE_PERFECT_SCORE;
 
         return $ga_score + $gb_score + $gc_score + $gd_score + $ge_score + $gf_score + $gg_score + $gh_score;
     }
@@ -363,7 +381,45 @@ class Entry extends Eloquent {
      */
     private function calculateFinalSixteenScore($admin_entry)
     {
-        return 0;
+        $entry_sixteen = array(
+            $this->f16_1, 
+            $this->f16_2, 
+            $this->f16_3, 
+            $this->f16_4,
+            $this->f16_5, 
+            $this->f16_6, 
+            $this->f16_7, 
+            $this->f16_8,
+            $this->f16_9, 
+            $this->f16_10, 
+            $this->f16_11, 
+            $this->f16_12,
+            $this->f16_13, 
+            $this->f16_14, 
+            $this->f16_15, 
+            $this->f16_16);
+
+        $admin_entry_sixteen = array(
+            $admin_entry->f16_1, 
+            $admin_entry->f16_2, 
+            $admin_entry->f16_3, 
+            $admin_entry->f16_4,
+            $admin_entry->f16_5, 
+            $admin_entry->f16_6, 
+            $admin_entry->f16_7, 
+            $admin_entry->f16_8,
+            $admin_entry->f16_9, 
+            $admin_entry->f16_10, 
+            $admin_entry->f16_11, 
+            $admin_entry->f16_12,
+            $admin_entry->f16_13, 
+            $admin_entry->f16_14, 
+            $admin_entry->f16_15, 
+            $admin_entry->f16_16);
+
+        $correct_predictions = array_intersect($admin_entry_sixteen, $entry_sixteen);
+
+        return count($correct_predictions) * self::FINAL_SIXTEEN_SCORE;
     }
 
     /**
@@ -371,7 +427,29 @@ class Entry extends Eloquent {
      */
     private function calculateFinalEightScore($admin_entry)
     {
-        return 0;
+        $entry_eight = array(
+            $this->f8_1, 
+            $this->f8_2, 
+            $this->f8_3, 
+            $this->f8_4,
+            $this->f8_5, 
+            $this->f8_6, 
+            $this->f8_7, 
+            $this->f8_8);
+
+        $admin_entry_eight = array(
+            $admin_entry->f8_1, 
+            $admin_entry->f8_2, 
+            $admin_entry->f8_3, 
+            $admin_entry->f8_4,
+            $admin_entry->f8_5, 
+            $admin_entry->f8_6, 
+            $admin_entry->f8_7, 
+            $admin_entry->f8_8);
+
+        $correct_predictions = array_intersect($admin_entry_eight, $entry_eight);
+
+        return count($correct_predictions) * self::FINAL_EIGHT_SCORE;
     }
 
     /**
@@ -379,7 +457,21 @@ class Entry extends Eloquent {
      */
     private function calculateFinalFourScore($admin_entry)
     {
-        return 0;
+        $entry_four = array(
+            $this->f4_1, 
+            $this->f4_2, 
+            $this->f4_3, 
+            $this->f4_4);
+
+        $admin_entry_four = array(
+            $admin_entry->f4_1, 
+            $admin_entry->f4_2, 
+            $admin_entry->f4_3, 
+            $admin_entry->f4_4);
+
+        $correct_predictions = array_intersect($admin_entry_four, $entry_four);
+
+        return count($correct_predictions) * self::FINAL_FOUR_SCORE;
     }
 
     /**
@@ -387,7 +479,17 @@ class Entry extends Eloquent {
      */
     private function calculateFinalTwoScore($admin_entry)
     {
-        return 0;
+        $entry_two = array(
+            $this->f2_1, 
+            $this->f4_2);
+
+        $admin_entry_two = array(
+            $admin_entry->f2_1, 
+            $admin_entry->f2_2);
+
+        $correct_predictions = array_intersect($admin_entry_two, $entry_two);
+
+        return count($correct_predictions) * self::FINAL_TWO_SCORE;
     }
 
     /**
@@ -395,6 +497,7 @@ class Entry extends Eloquent {
      */
     private function calculateWinnerScore($admin_entry)
     {
+        if ($this->winner == $admin_entry->winner) return self::WINNER_SCORE;
         return 0;
     }
 
