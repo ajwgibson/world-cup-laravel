@@ -381,41 +381,43 @@ class Entry extends Eloquent {
      */
     private function calculateFinalSixteenScore($admin_entry)
     {
-        $entry_sixteen = array(
-            $this->f16_1, 
-            $this->f16_2, 
-            $this->f16_3, 
-            $this->f16_4,
-            $this->f16_5, 
-            $this->f16_6, 
-            $this->f16_7, 
-            $this->f16_8,
-            $this->f16_9, 
-            $this->f16_10, 
-            $this->f16_11, 
-            $this->f16_12,
-            $this->f16_13, 
-            $this->f16_14, 
-            $this->f16_15, 
-            $this->f16_16);
+        $entry_sixteen = array_filter(
+            array(
+                $this->f16_1, 
+                $this->f16_2, 
+                $this->f16_3, 
+                $this->f16_4,
+                $this->f16_5, 
+                $this->f16_6, 
+                $this->f16_7, 
+                $this->f16_8,
+                $this->f16_9, 
+                $this->f16_10, 
+                $this->f16_11, 
+                $this->f16_12,
+                $this->f16_13, 
+                $this->f16_14, 
+                $this->f16_15, 
+                $this->f16_16));
 
-        $admin_entry_sixteen = array(
-            $admin_entry->f16_1, 
-            $admin_entry->f16_2, 
-            $admin_entry->f16_3, 
-            $admin_entry->f16_4,
-            $admin_entry->f16_5, 
-            $admin_entry->f16_6, 
-            $admin_entry->f16_7, 
-            $admin_entry->f16_8,
-            $admin_entry->f16_9, 
-            $admin_entry->f16_10, 
-            $admin_entry->f16_11, 
-            $admin_entry->f16_12,
-            $admin_entry->f16_13, 
-            $admin_entry->f16_14, 
-            $admin_entry->f16_15, 
-            $admin_entry->f16_16);
+        $admin_entry_sixteen = array_filter(
+            array(
+                $admin_entry->f16_1, 
+                $admin_entry->f16_2, 
+                $admin_entry->f16_3, 
+                $admin_entry->f16_4,
+                $admin_entry->f16_5, 
+                $admin_entry->f16_6, 
+                $admin_entry->f16_7, 
+                $admin_entry->f16_8,
+                $admin_entry->f16_9, 
+                $admin_entry->f16_10, 
+                $admin_entry->f16_11, 
+                $admin_entry->f16_12,
+                $admin_entry->f16_13, 
+                $admin_entry->f16_14, 
+                $admin_entry->f16_15, 
+                $admin_entry->f16_16));
 
         $correct_predictions = array_intersect($admin_entry_sixteen, $entry_sixteen);
 
@@ -427,25 +429,27 @@ class Entry extends Eloquent {
      */
     private function calculateFinalEightScore($admin_entry)
     {
-        $entry_eight = array(
-            $this->f8_1, 
-            $this->f8_2, 
-            $this->f8_3, 
-            $this->f8_4,
-            $this->f8_5, 
-            $this->f8_6, 
-            $this->f8_7, 
-            $this->f8_8);
+        $entry_eight = array_filter(
+            array(
+                $this->f8_1, 
+                $this->f8_2, 
+                $this->f8_3, 
+                $this->f8_4,
+                $this->f8_5, 
+                $this->f8_6, 
+                $this->f8_7, 
+                $this->f8_8));
 
-        $admin_entry_eight = array(
-            $admin_entry->f8_1, 
-            $admin_entry->f8_2, 
-            $admin_entry->f8_3, 
-            $admin_entry->f8_4,
-            $admin_entry->f8_5, 
-            $admin_entry->f8_6, 
-            $admin_entry->f8_7, 
-            $admin_entry->f8_8);
+        $admin_entry_eight = array_filter( 
+            array(
+                $admin_entry->f8_1, 
+                $admin_entry->f8_2, 
+                $admin_entry->f8_3, 
+                $admin_entry->f8_4,
+                $admin_entry->f8_5, 
+                $admin_entry->f8_6, 
+                $admin_entry->f8_7, 
+                $admin_entry->f8_8));
 
         $correct_predictions = array_intersect($admin_entry_eight, $entry_eight);
 
@@ -457,17 +461,19 @@ class Entry extends Eloquent {
      */
     private function calculateFinalFourScore($admin_entry)
     {
-        $entry_four = array(
-            $this->f4_1, 
-            $this->f4_2, 
-            $this->f4_3, 
-            $this->f4_4);
+        $entry_four = array_filter(
+            array(
+                $this->f4_1, 
+                $this->f4_2, 
+                $this->f4_3, 
+                $this->f4_4));
 
-        $admin_entry_four = array(
-            $admin_entry->f4_1, 
-            $admin_entry->f4_2, 
-            $admin_entry->f4_3, 
-            $admin_entry->f4_4);
+        $admin_entry_four = array_filter(
+            array(
+                $admin_entry->f4_1, 
+                $admin_entry->f4_2, 
+                $admin_entry->f4_3, 
+                $admin_entry->f4_4));
 
         $correct_predictions = array_intersect($admin_entry_four, $entry_four);
 
@@ -479,13 +485,15 @@ class Entry extends Eloquent {
      */
     private function calculateFinalTwoScore($admin_entry)
     {
-        $entry_two = array(
-            $this->f2_1, 
-            $this->f4_2);
+        $entry_two = array_filter(
+            array(
+                $this->f2_1, 
+                $this->f4_2));
 
-        $admin_entry_two = array(
-            $admin_entry->f2_1, 
-            $admin_entry->f2_2);
+        $admin_entry_two = array_filter(
+            array(
+                $admin_entry->f2_1, 
+                $admin_entry->f2_2));
 
         $correct_predictions = array_intersect($admin_entry_two, $entry_two);
 
@@ -497,7 +505,7 @@ class Entry extends Eloquent {
      */
     private function calculateWinnerScore($admin_entry)
     {
-        if ($this->winner == $admin_entry->winner) return self::WINNER_SCORE;
+        if ($admin_entry->winner && ($admin_entry->winner == $this->winner)) return self::WINNER_SCORE;
         return 0;
     }
 
