@@ -84,3 +84,10 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 	Route::get('entry',  array('as' => 'admin.entry', 'uses' => 'AdminController@entry'));
 	Route::post('entry', array('uses' => 'AdminController@updateEntry'));
 });
+
+
+// Loader.io
+Route::get('loaderio-c0c2c980568b95c9b68059c71e59610e', function()
+{
+    return 'loaderio-c0c2c980568b95c9b68059c71e59610e';
+});
