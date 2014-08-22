@@ -87,7 +87,10 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 
 
 // Loader.io
-Route::get('loaderio-c0c2c980568b95c9b68059c71e59610e/', function()
+Route::group(array('prefix' => 'loaderio-c0c2c980568b95c9b68059c71e59610e'), function()
 {
-    return 'loaderio-c0c2c980568b95c9b68059c71e59610e';
+	Route::get('/', function()
+	{
+    	return 'loaderio-c0c2c980568b95c9b68059c71e59610e';
+    });
 });
